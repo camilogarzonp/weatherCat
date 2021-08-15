@@ -15,6 +15,11 @@
 		2649BB8F26C94EA800F12949 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2649BB8D26C94EA800F12949 /* LaunchScreen.storyboard */; };
 		2649BB9A26C94EA900F12949 /* WeatherCatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2649BB9926C94EA900F12949 /* WeatherCatTests.swift */; };
 		2649BBA526C94EA900F12949 /* WeatherCatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2649BBA426C94EA900F12949 /* WeatherCatUITests.swift */; };
+		2649BBB626C95E7300F12949 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2649BBB526C95E7300F12949 /* DetailViewController.swift */; };
+		265373B226C9651D004445DE /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265373B126C9651D004445DE /* WeatherModel.swift */; };
+		265373B526C96A6A004445DE /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265373B426C96A6A004445DE /* Helpers.swift */; };
+		265373BC26C96F70004445DE /* CityCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265373BA26C96F70004445DE /* CityCardCollectionViewCell.swift */; };
+		265373BD26C96F70004445DE /* CityCardCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 265373BB26C96F70004445DE /* CityCardCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +54,11 @@
 		2649BBA026C94EA900F12949 /* WeatherCatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherCatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2649BBA426C94EA900F12949 /* WeatherCatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCatUITests.swift; sourceTree = "<group>"; };
 		2649BBA626C94EA900F12949 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2649BBB526C95E7300F12949 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		265373B126C9651D004445DE /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		265373B426C96A6A004445DE /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		265373BA26C96F70004445DE /* CityCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCardCollectionViewCell.swift; sourceTree = "<group>"; };
+		265373BB26C96F70004445DE /* CityCardCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CityCardCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +109,7 @@
 		2649BB8126C94EA100F12949 /* WeatherCat */ = {
 			isa = PBXGroup;
 			children = (
+				265373B326C96A3B004445DE /* Helpers */,
 				2649BBB226C94F1C00F12949 /* Model */,
 				2649BBB426C94F3000F12949 /* View */,
 				2649BBB326C94F2300F12949 /* Controller */,
@@ -132,6 +143,7 @@
 		2649BBB226C94F1C00F12949 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				265373B126C9651D004445DE /* WeatherModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,6 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				2649BB8626C94EA100F12949 /* ViewController.swift */,
+				265373BA26C96F70004445DE /* CityCardCollectionViewCell.swift */,
+				2649BBB526C95E7300F12949 /* DetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -148,8 +162,17 @@
 			isa = PBXGroup;
 			children = (
 				2649BB8826C94EA100F12949 /* Main.storyboard */,
+				265373BB26C96F70004445DE /* CityCardCollectionViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		265373B326C96A3B004445DE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				265373B426C96A6A004445DE /* Helpers.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2649BB8F26C94EA800F12949 /* LaunchScreen.storyboard in Resources */,
+				265373BD26C96F70004445DE /* CityCardCollectionViewCell.xib in Resources */,
 				2649BB8C26C94EA800F12949 /* Assets.xcassets in Resources */,
 				2649BB8A26C94EA100F12949 /* Main.storyboard in Resources */,
 			);
@@ -283,8 +307,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2649BB8726C94EA100F12949 /* ViewController.swift in Sources */,
+				265373B526C96A6A004445DE /* Helpers.swift in Sources */,
 				2649BB8326C94EA100F12949 /* AppDelegate.swift in Sources */,
 				2649BB8526C94EA100F12949 /* SceneDelegate.swift in Sources */,
+				2649BBB626C95E7300F12949 /* DetailViewController.swift in Sources */,
+				265373BC26C96F70004445DE /* CityCardCollectionViewCell.swift in Sources */,
+				265373B226C9651D004445DE /* WeatherModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
