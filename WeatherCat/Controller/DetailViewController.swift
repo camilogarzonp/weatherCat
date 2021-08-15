@@ -43,6 +43,19 @@ class DetailViewController: UIViewController {
         tempMinLabel.text = "\(tempMin)º"
         tempMaxLabel.text = "\(tempMax)º"
         windSpeedLabel.text = "\(windSpeed) m/s"
+        if icon.lowercased() == "clear" {
+            self.weatherIcon.image = UIImage(systemName: "sun.max.fill")
+            self.weatherIcon.tintColor = .yellow
+        } else if icon.lowercased() == "clouds" {
+            self.weatherIcon.image = UIImage(systemName: "cloud.fill")
+            self.weatherIcon.tintColor = .gray
+        } else if icon.lowercased() == "rain" {
+            self.weatherIcon.image = UIImage(systemName: "cloud.heavyrain.fill")
+            self.weatherIcon.tintColor = .blue
+        } else if icon.lowercased() == "thunderstorm" {
+            self.weatherIcon.image = UIImage(systemName: "cloud.bolt.rain.fill")
+            self.weatherIcon.tintColor = .blue
+        }
     }
     
     func getHourForTimeZone (forTimeZone timeZone: Int?) -> String {

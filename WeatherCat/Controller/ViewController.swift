@@ -50,8 +50,6 @@ class ViewController: UIViewController {
 
     func makeDataRequestWithCoordinates(forCoordinates coordinates: CLLocationCoordinate2D){
         
-        print("Ingreso al make coordinates")
-        
         let long = coordinates.longitude, lat = coordinates.latitude
         
         guard let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(long)&appid=\(API_KEY)&units=metric".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
@@ -143,6 +141,8 @@ extension ViewController: UICollectionViewDelegate {
         desVC.tempMin = locationsWeather[indexPath.row].main.temp_min
         desVC.tempMax = locationsWeather[indexPath.row].main.temp_max
         desVC.windSpeed = locationsWeather[indexPath.row].wind.speed
+        guard let icon = locationsWeather[indexPath.row].weather.first?.main else { return }
+        desVC.icon = icon
         self.navigationController?.pushViewController(desVC, animated: true)
     }
 }
