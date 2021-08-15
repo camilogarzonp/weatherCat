@@ -99,10 +99,11 @@
 		2649BB8126C94EA100F12949 /* WeatherCat */ = {
 			isa = PBXGroup;
 			children = (
+				2649BBB226C94F1C00F12949 /* Model */,
+				2649BBB426C94F3000F12949 /* View */,
+				2649BBB326C94F2300F12949 /* Controller */,
 				2649BB8226C94EA100F12949 /* AppDelegate.swift */,
 				2649BB8426C94EA100F12949 /* SceneDelegate.swift */,
-				2649BB8626C94EA100F12949 /* ViewController.swift */,
-				2649BB8826C94EA100F12949 /* Main.storyboard */,
 				2649BB8B26C94EA800F12949 /* Assets.xcassets */,
 				2649BB8D26C94EA800F12949 /* LaunchScreen.storyboard */,
 				2649BB9026C94EA800F12949 /* Info.plist */,
@@ -126,6 +127,29 @@
 				2649BBA626C94EA900F12949 /* Info.plist */,
 			);
 			path = WeatherCatUITests;
+			sourceTree = "<group>";
+		};
+		2649BBB226C94F1C00F12949 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2649BBB326C94F2300F12949 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2649BB8626C94EA100F12949 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2649BBB426C94F3000F12949 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2649BB8826C94EA100F12949 /* Main.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
