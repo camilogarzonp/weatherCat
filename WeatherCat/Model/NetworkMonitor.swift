@@ -8,6 +8,7 @@
 import Foundation
 import Network
 
+/// Class that verifies the connection that the device has
 final class NetworkMonitor {
     static let shared = NetworkMonitor()
     
@@ -29,18 +30,23 @@ final class NetworkMonitor {
         monitor = NWPathMonitor()
     }
     
+    /// Start network monitoring
     public func startMonitoring() {
         monitor.start(queue: queue)
         monitor.pathUpdateHandler = { [weak self] path in
-            self?.isConnected = path.status != .unsatisfied
+            self?.isConnected = path.status == .satisfied
             self?.getConnectionType(path)
         }
     }
     
+    
+    /// Stop network monitoring
     public func stopMonitoring() {
         monitor.cancel()
     }
     
+    /// Determine what type of connection the device has
+    /// - Parameter path:Path get it in pathUpdateHandler
     private func getConnectionType(_ path: NWPath) {
         if path.usesInterfaceType(.wifi) {
             connectionType = .wifi

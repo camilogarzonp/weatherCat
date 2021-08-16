@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OiL-4J-F4e">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -81,7 +82,14 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="i2a-FK-qWX" secondAttribute="bottom" id="hb1-qF-XSM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="WeatherCat" id="57Z-SJ-JaX"/>
+                    <navigationItem key="navigationItem" title="WeatherCat" id="57Z-SJ-JaX">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="HZq-7x-oRe">
+                            <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <action selector="refreshData:" destination="BYZ-38-t0r" id="Lgm-c6-X90"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="i2a-FK-qWX" id="e46-3x-QZd"/>
                         <outlet property="currentLocationName" destination="NJY-aa-meF" id="5Z9-AU-Wy2"/>
@@ -411,6 +419,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

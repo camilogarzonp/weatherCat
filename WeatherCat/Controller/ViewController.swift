@@ -47,11 +47,23 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        checkNetwork()
+    }
+    
+    /// Connection checker which will determine whether to call the API or search the data stored in the cell phone
+    func checkNetwork(){
         if NetworkMonitor.shared.isConnected {
+            self.locationsWeather.removeAll()
             setupLocation()
         } else {
             self.locationsWeather.removeAll()
             getDataPersistense()
+        }
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+            if self.locationsWeather.count == 0 {
+                self.currentLocationName.text = "You're offline"
+            }
         }
     }
     
@@ -149,6 +161,10 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func refreshData(_ sender: Any) {
+        checkNetwork()
+    }
 }
 
 extension ViewController: CLLocationManagerDelegate {
@@ -158,9 +174,8 @@ extension ViewController: CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
         
         self.locationsWeather.removeAll()
-        self.locationsWeatherData.removeAll()
         
-        UserDefaults.standard.set(locationsWeatherData, forKey: self.citiesWeatherKey)
+        UserDefaults.standard.removeObject(forKey: self.citiesWeatherKey)
         
         makeDataRequestWithCoordinates(forCoordinates: location.coordinate)
         
@@ -211,3 +226,6 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: width, height: height)
     }
 }
+
+
+

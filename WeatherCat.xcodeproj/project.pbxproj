@@ -120,7 +120,6 @@
 				2649BB8B26C94EA800F12949 /* Assets.xcassets */,
 				2649BB8D26C94EA800F12949 /* LaunchScreen.storyboard */,
 				2649BB9026C94EA800F12949 /* Info.plist */,
-				265373C026CAE026004445DE /* NetworkMonitor.swift */,
 			);
 			path = WeatherCat;
 			sourceTree = "<group>";
@@ -147,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				265373B126C9651D004445DE /* WeatherModel.swift */,
+				265373C026CAE026004445DE /* NetworkMonitor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
