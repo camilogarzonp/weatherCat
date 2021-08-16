@@ -8,6 +8,8 @@
 import UIKit
 import CoreLocation
 
+
+/// Home screen
 class ViewController: UIViewController {
 
     @IBOutlet var currentLocationName: UILabel!
@@ -15,11 +17,14 @@ class ViewController: UIViewController {
     
     var locationsWeather = [WeatherAPI]()
     
+//    MARK: -Vars city cards size
     let width = 165
     let height = 200
     
     let locationManager = CLLocationManager()
+//    MARK: - Var API_KEY
     private let API_KEY = "366338160a785ca26b052f816aca8af5"
+//    MARK: - Array with the cities to research
     var majorCities : [String] =  ["New york", "Moscu", "Madrid", "roma", "MEDELLIN"]
 
     override func viewDidLoad() {
@@ -42,12 +47,15 @@ class ViewController: UIViewController {
         setupLocation()
     }
     
+    /// Asks for authorization to obtain the location of the user's device and then asks the delegate for the location of the device
     func setupLocation(){
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
-
+    
+    /// Build the request to be sent to the service if you want to check the location obtained by the device's gps
+    /// - Parameter coordinates: coordinates obtained by the device, thanks to CoreLocation
     func makeDataRequestWithCoordinates(forCoordinates coordinates: CLLocationCoordinate2D){
         
         let long = coordinates.longitude, lat = coordinates.latitude
@@ -56,6 +64,28 @@ class ViewController: UIViewController {
         
         guard let url = URL(string: urlString) else { return }
         
+        getDataAPI(forUrl: url, isCurrentLocation: true)
+    }
+    
+    /// Build the request to be sent to the service if you want to consult the name of a city
+    /// - Parameter nameCity: City name regardless of spaces
+    func makeDataRequestWithNameCity(forNameCity nameCity: String) {
+        var cityNameValidated = nameCity.trimmingCharacters(in: .whitespacesAndNewlines)
+        cityNameValidated = cityNameValidated.removeExtraSpaces()
+        cityNameValidated = cityNameValidated.changeSpacesForPlus()
+        
+        guard let urlString = "https://api.openweathermap.org/data/2.5/weather?q=\(cityNameValidated)&appid=\(API_KEY)&units=metric".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+        
+        guard let url = URL(string: urlString) else { return }
+        
+        getDataAPI(forUrl: url, isCurrentLocation: false)
+    }
+    
+    /// Send the request to the service to bring the data you need
+    /// - Parameters:
+    ///   - url: url type with which the API will be consulted
+    ///   - currentLocation: bool type if true allows assigning the name of the location (city name) to the variable currentLocationName to display it on the screen
+    func getDataAPI(forUrl url: URL, isCurrentLocation currentLocation: Bool){
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else { return }
             
@@ -73,37 +103,9 @@ class ViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
-                self.currentLocationName.text = result.name
-            }
-        }.resume()
-    }
-    
-    func makeDataRequestWithNameCity(forNameCity nameCity: String) {
-        var cityNameValidated = nameCity.trimmingCharacters(in: .whitespacesAndNewlines)
-        cityNameValidated = cityNameValidated.removeExtraSpaces()
-        cityNameValidated = cityNameValidated.changeSpacesForPlus()
-        
-        guard let urlString = "https://api.openweathermap.org/data/2.5/weather?q=\(cityNameValidated)&appid=\(API_KEY)&units=metric".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-        
-        guard let url = URL(string: urlString) else { return }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            
-            var json: WeatherAPI?
-            
-            do {
-                json = try JSONDecoder().decode(WeatherAPI.self, from: data)
-            } catch {
-                print("\nError: \(error.localizedDescription)\n")
-            }
-            
-            guard let result = json else { return }
-            
-            self.locationsWeather.append(result)
-            
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                if currentLocation {
+                    self.currentLocationName.text = result.name
+                }
             }
         }.resume()
     }

@@ -26,6 +26,8 @@ class CityCardCollectionViewCell: UICollectionViewCell {
         return UINib(nibName: "CityCardCollectionViewCell", bundle: nil)
     }
     
+    /// Assigning values to display in the cell
+    /// - Parameter model: WeatherAPI type model
     func configure(with model: WeatherAPI) {
         self.tempLabel.text = "\(model.main.temp)º"
         self.temMinLabel.text = "\(model.main.temp_min)º"

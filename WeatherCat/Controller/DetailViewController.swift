@@ -58,6 +58,9 @@ class DetailViewController: UIViewController {
         }
     }
     
+    /// This method determines the current time in another region depending on your time zone
+    /// - Parameter timeZone: Time zone in seconds
+    /// - Returns: Returns the time in HH: mm format as a string
     func getHourForTimeZone (forTimeZone timeZone: Int?) -> String {
         guard let GMT = timeZone else {
             return ""
