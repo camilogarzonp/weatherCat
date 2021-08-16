@@ -20,6 +20,7 @@
 		265373B526C96A6A004445DE /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265373B426C96A6A004445DE /* Helpers.swift */; };
 		265373BC26C96F70004445DE /* CityCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265373BA26C96F70004445DE /* CityCardCollectionViewCell.swift */; };
 		265373BD26C96F70004445DE /* CityCardCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 265373BB26C96F70004445DE /* CityCardCollectionViewCell.xib */; };
+		265373C126CAE026004445DE /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265373C026CAE026004445DE /* NetworkMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		265373B426C96A6A004445DE /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		265373BA26C96F70004445DE /* CityCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		265373BB26C96F70004445DE /* CityCardCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CityCardCollectionViewCell.xib; sourceTree = "<group>"; };
+		265373C026CAE026004445DE /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				2649BB8B26C94EA800F12949 /* Assets.xcassets */,
 				2649BB8D26C94EA800F12949 /* LaunchScreen.storyboard */,
 				2649BB9026C94EA800F12949 /* Info.plist */,
+				265373C026CAE026004445DE /* NetworkMonitor.swift */,
 			);
 			path = WeatherCat;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2649BB8726C94EA100F12949 /* ViewController.swift in Sources */,
+				265373C126CAE026004445DE /* NetworkMonitor.swift in Sources */,
 				265373B526C96A6A004445DE /* Helpers.swift in Sources */,
 				2649BB8326C94EA100F12949 /* AppDelegate.swift in Sources */,
 				2649BB8526C94EA100F12949 /* SceneDelegate.swift in Sources */,

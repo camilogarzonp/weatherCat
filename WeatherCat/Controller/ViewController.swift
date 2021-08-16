@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     
     var locationsWeather = [WeatherAPI]()
+    var locationsWeatherData = [Data]()
     
 //    MARK: -Vars city cards size
     let width = 165
@@ -26,6 +27,8 @@ class ViewController: UIViewController {
     private let API_KEY = "366338160a785ca26b052f816aca8af5"
 //    MARK: - Array with the cities to research
     var majorCities : [String] =  ["New york", "Moscu", "Madrid", "roma", "MEDELLIN"]
+    
+    private let citiesWeatherKey = "citiesWeatherKey"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +47,12 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupLocation()
+        if NetworkMonitor.shared.isConnected {
+            setupLocation()
+        } else {
+            self.locationsWeather.removeAll()
+            getDataPersistense()
+        }
     }
     
     /// Asks for authorization to obtain the location of the user's device and then asks the delegate for the location of the device
@@ -86,7 +94,7 @@ class ViewController: UIViewController {
     ///   - url: url type with which the API will be consulted
     ///   - currentLocation: bool type if true allows assigning the name of the location (city name) to the variable currentLocationName to display it on the screen
     func getDataAPI(forUrl url: URL, isCurrentLocation currentLocation: Bool){
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: url) { [self] data, response, error in
             guard let data = data, error == nil else { return }
             
             var json: WeatherAPI?
@@ -99,6 +107,12 @@ class ViewController: UIViewController {
             
             guard let result = json else { return }
             
+            if let obj = try? PropertyListEncoder().encode(result) {
+                self.locationsWeatherData.append(obj)
+                
+                UserDefaults.standard.set(locationsWeatherData, forKey: self.citiesWeatherKey)
+            }
+            
             self.locationsWeather.append(result)
             
             DispatchQueue.main.async {
@@ -109,6 +123,32 @@ class ViewController: UIViewController {
             }
         }.resume()
     }
+    
+    /// Get data when device is offline
+    func getDataPersistense(){
+        var propertyList: WeatherAPI?
+        
+        if let data = UserDefaults.standard.object(forKey: self.citiesWeatherKey) as? [Data] {
+            for data in data {
+                
+                do {
+                    propertyList = try PropertyListDecoder().decode(WeatherAPI.self, from: data)
+
+                    
+                } catch {
+                    print("Error: \(error.localizedDescription)\n")
+                }
+                guard let result = propertyList else { return }
+                
+                self.locationsWeather.append(result)
+
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                    self.currentLocationName.text = "You're offline"
+                }
+            }
+        }
+    }
 }
 
 extension ViewController: CLLocationManagerDelegate {
@@ -118,6 +158,9 @@ extension ViewController: CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
         
         self.locationsWeather.removeAll()
+        self.locationsWeatherData.removeAll()
+        
+        UserDefaults.standard.set(locationsWeatherData, forKey: self.citiesWeatherKey)
         
         makeDataRequestWithCoordinates(forCoordinates: location.coordinate)
         
